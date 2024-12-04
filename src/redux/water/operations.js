@@ -1,16 +1,15 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-axios.defaults.baseURL = "https://back-inter-mafia.onrender.com/api/water";
+import instance from "../auth/operations.js";
 
 export const fetchWaterData = createAsyncThunk(
   "water/fetchWaterData",
   async ({ type, date }, thunkAPI) => {
     try {
-      const endpoint = type === "month" ? "/month" : "/day";
+      const endpoint = type === "water/month" ? "water/month" : "water/day";
       // console.log(endpoint);
 
-      const response = await axios.get(endpoint, {
+      const response = await instance.get(endpoint, {
         params: { date },
       });
 
@@ -26,7 +25,7 @@ export const getWaterAmountPerDay = createAsyncThunk(
   "water/waterAmount",
   async (_, thunkApi) => {
     try {
-      const { data } = await axios.get("/");
+      const { data } = await instance.get("/water");
       // console.log(data);
       return data.amount;
     } catch (error) {
@@ -39,7 +38,7 @@ export const apiDeleteWater = createAsyncThunk(
   "water/apiDeleteWater",
   async (waterId, thunkApi) => {
     try {
-      const { data } = await axios.delete(`/water/${waterId}`);
+      const { data } = await instance.delete(`/water/${waterId}`);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -49,7 +48,7 @@ export const apiDeleteWater = createAsyncThunk(
 
 export const postWaterData = async (entries) => {
   try {
-    const response = await axios.post("/", entries);
+    const response = await instance.post("/water", entries);
     return response.data;
   } catch (e) {
     throw new Error(e.response?.status || "Post water error");
@@ -58,7 +57,7 @@ export const postWaterData = async (entries) => {
 
 export const editWaterData = async (entries) => {
   try {
-    const response = await axios.patch(`/`, entries);
+    const response = await instance.patch(`/water`, entries);
     return response.data;
   } catch (e) {
     throw new Error(e.response?.status || "Post water error");
