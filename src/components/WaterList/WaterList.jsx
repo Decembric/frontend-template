@@ -1,4 +1,4 @@
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Scrollbar } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,13 +8,17 @@ import "swiper/css/scrollbar";
 
 import WaterItem from "../WaterItem/WaterItem";
 import s from "./WaterList.module.css";
-// import { useEffect } from "react";
-// import { fetchWaterItems } from "../../redux/water/operations";
+// import { useSelector } from "react-redux";
+import { selectWaterItems } from "../../redux/water/selectors";
+import { useEffect } from "react";
+import { fetchWaterItems } from "../../redux/water/operations";
 const WaterList = () => {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchWaterItems());
-  // }, [dispatch]);
+  const items = useSelector(selectWaterItems());
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchWaterItems());
+  }, [dispatch]);
   return (
     <ul className={s.wrapper}>
       <Swiper
@@ -26,7 +30,21 @@ const WaterList = () => {
         onSwiper={(swiper) => console.log(swiper)}
         onSlideChange={() => console.log("slide change")}
       >
-        <SwiperSlide className={s.swiperSlide}>
+        {items.map((item) => {
+          return (
+            <li key={item._id}>
+              <SwiperSlide>
+                <WaterItem
+                  id={item._id}
+                  amount={item.amount}
+                  createdAt={item.createdAt}
+                />
+              </SwiperSlide>
+            </li>
+          );
+        })}
+
+        {/* <SwiperSlide>
           <WaterItem />
         </SwiperSlide>
         <SwiperSlide>
@@ -37,7 +55,7 @@ const WaterList = () => {
         </SwiperSlide>
         <SwiperSlide>
           <WaterItem />
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Swiper>
       {/* <WaterItem />
       <WaterItem />
