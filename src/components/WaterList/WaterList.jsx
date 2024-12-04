@@ -13,7 +13,7 @@ import { selectWaterItems } from "../../redux/water/selectors";
 import { useEffect } from "react";
 import { fetchWaterItems } from "../../redux/water/operations";
 const WaterList = () => {
-  const items = useSelector(selectWaterItems());
+  const items = useSelector(selectWaterItems);
 
   const dispatch = useDispatch();
   useEffect(() => {
