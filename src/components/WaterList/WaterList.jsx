@@ -13,11 +13,14 @@ import { selectWaterItems } from "../../redux/water/selectors";
 import { useEffect } from "react";
 import { fetchWaterItems } from "../../redux/water/operations";
 const WaterList = () => {
-  const items = useSelector(selectWaterItems());
+  const items = useSelector(selectWaterItems);
+  console.log(items);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchWaterItems());
+
+    fetchWaterItems();
   }, [dispatch]);
   return (
     <ul className={s.wrapper}>
