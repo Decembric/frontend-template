@@ -9,19 +9,20 @@ import {
 import { selectDaysNotAsInWeek } from "../../redux/settings/selectors";
 import CalendarItem from "../CalendarItem/CalendarItem";
 import { fetchWaterData } from "../../redux/water/operations";
+import Loader from "../Loader/Loader";
 
 const Calendar = () => {
   const dispatch = useDispatch();
   const dateToShow = useSelector(selectChosenMonth);
   const daysDrinking = useSelector(selectDaysDrinking);
-  const daysNotAsInWeek = useSelector(selectDaysNotAsInWeek) ? true : false;
+  const daysAsInWeek = useSelector(selectDaysNotAsInWeek) ? false : true;
   const isLoading = useSelector(selectIsLoading);
+  const mobileDevice = window.matchMedia("(max-width: 767px)").matches;
 
-  // const today = ;
-  const [today_day, today_month, today_year_time] = new Date() // month починаються з нуля в Date
-    .toLocaleString()
-    .split(".");
-  const today_year = today_year_time.slice(0, 4);
+  const [today_year, today_month, today_day] = new Date() // month починаються з нуля в Date
+    .toLocaleDateString("en-CA")
+    .split("-");
+
   const [year, month] = dateToShow.split("-");
   const firstDayOfWeek = 0; // Перший день місяця (0 - понеділок, 1 - неділя)
 
@@ -65,7 +66,7 @@ const Calendar = () => {
         );
     });
 
-    if (daysNotAsInWeek) return daysArray;
+    if (!daysAsInWeek) return daysArray;
 
     // Додаємо порожні дні перед початком місяця
     const firstDayOfMonth = new Date(
@@ -81,16 +82,20 @@ const Calendar = () => {
     }));
 
     return [...emptyDaysBefore, ...daysArray];
-  }, [daysDrinking, daysNotAsInWeek, month, year]);
-
-  // console.dir(calendarDays);
+  }, [daysDrinking, daysAsInWeek, month, year]);
 
   return (
     <div className={css.calendar}>
       {isLoading ? (
-        <p>Creating your water-drinking calendar...</p>
+        <Loader height={mobileDevice ? "300px" : "305px"} />
       ) : (
-        <div className={css.grid}>
+        <div
+          className={`${
+            daysAsInWeek
+              ? `${css.grid} ${mobileDevice ? "" : "grid7desktop"}`
+              : css.grid8
+          }`}
+        >
           {calendarDays.map(({ day, percent }, index) => (
             <CalendarItem
               key={`${index}${percent}`}

@@ -6,13 +6,17 @@ import WaterProgressBar from "../WaterProgressBar/WaterProgressBar.jsx";
 import css from "./WaterMainInfo.module.css";
 import { getUserInfo } from "../../redux/settings/operations.js";
 import { useDispatch } from "react-redux";
+import { getWaterData } from "../../redux/water/operations.js";
 
 const WaterMainInfo = () => {
   const dispatch = useDispatch();
-  // const token = useSelector(selectAuthToken);
-  // console.log(token);
+
   useEffect(() => {
     dispatch(getUserInfo());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getWaterData());
   }, [dispatch]);
 
   return (
