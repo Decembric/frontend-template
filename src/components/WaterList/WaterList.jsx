@@ -18,6 +18,8 @@ const WaterList = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchWaterItems());
+
+    fetchWaterItems();
   }, [dispatch]);
   return (
     <ul className={s.wrapper}>
