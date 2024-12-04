@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import instance from "../auth/operations.js";
+import { instance } from "../auth/operations.js";
 
 export const fetchWaterData = createAsyncThunk(
   "water/fetchWaterData",
@@ -37,7 +37,6 @@ export const apiDeleteWater = createAsyncThunk(
   "water/apiDeleteWater",
   async (waterId, thunkApi) => {
     try {
-      const { data } = await instance.delete(`/water/${waterId}`);
       const { data } = await instance.delete(`/water/${waterId}`);
       return data;
     } catch (error) {
