@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { lazy, Suspense, useEffect } from "react";
+import Loader from "./components/Loader/Loader";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
+import { Route, Routes } from "react-router-dom";
+import { useDispatch} from "react-redux";
+// import { selectAuthIsRefreshing } from "./redux/auth/selectors";
+import { apiRefresh } from "./redux/auth/operations";
+
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));
+const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage"));
+const TrackerPage = lazy(() => import("./pages/TrackerPage/TrackerPage"));
 
 function App() {
-  const [count, setCount] = useState(0)
+  const dispatch = useDispatch();
+  // const refresh = useSelector(selectAuthIsRefreshing);
+
+  useEffect(() => {
+    dispatch(apiRefresh());
+  }, [dispatch]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/tracker"
+            element={<PrivateRoute component={<TrackerPage />} />}
+          />
+          <Route
+            path="/signin"
+            element={<RestrictedRoute component={<SignInPage />} />}
+          />
+          <Route
+            path="/signup"
+            element={<RestrictedRoute component={<SignUpPage />} />}
+          />
+        </Routes>
+      </Suspense>
+    </main>
+  );
 }
 
-export default App
+export default App;
