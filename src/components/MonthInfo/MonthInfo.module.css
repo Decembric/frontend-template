@@ -1,0 +1,64 @@
+.sectionCalendar {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.MonthInfo {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.toRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  color: #323f47;
+  font-weight: 700;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  /* line-height: 1.2; */
+  letter-spacing: -0.01em;
+}
+@media only screen and (max-width: 355px) {
+  .statisticsTitle {
+    font-size: 14px;
+  }
+}
+
+.toggleViewBtn {
+  margin-left: 6px;
+  border: transparent;
+  background-color: transparent;
+  cursor: pointer;
+}
+.toggleViewBtnImg {
+  width: 20px;
+  height: 20px;
+  fill: transparent;
+  stroke: #9be1a0;
+}
+.toggleViewBtn:hover .toggleViewBtnImg {
+  fill: #9be1a0;
+  stroke: #323f47;
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 28px;
+    height: 32px;
+  }
+
+  .toggleViewBtn {
+    margin-left: 10px;
+  }
+
+  .toggleViewBtnImg {
+    width: 24px;
+    height: 24px;
+  }
+}

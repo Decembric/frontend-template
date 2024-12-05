@@ -1,0 +1,111 @@
+.settingModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1000;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+.settingModal {
+  border-radius: 15px;
+  padding: 40px 20px;
+  width: 343px;
+  margin-top: 80px;
+  background-color: #fff;
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 735px;
+  @media (min-width: 768px) {
+    padding: 40px;
+    width: 648px;
+    max-height: 880px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 920px;
+    max-height: 685px;
+  }
+}
+
+.settingModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  @media (max-width: 767px) {
+    position: relative;
+  }
+}
+
+.settingModalIcon {
+  stroke: #2f2f2f;
+  @media (min-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.settingModalButton {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  @media (max-width: 767px) {
+    position: absolute;
+    top: -20px;
+    right: 0;
+  }
+}
+
+.settingModalButton .settingModalIcon:hover {
+  stroke: var(--accent);
+}
+
+.settingModalScrollable {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0 -15px;
+  padding: 0 7px;
+  scrollbar-width: thin;
+  scrollbar-color: #f0eff4 transparent;
+}
+
+.settingModalScrollable::-webkit-scrollbar {
+  width: 4px;
+}
+
+.settingModalScrollable::-webkit-scrollbar-thumb {
+  background-color: #f0eff4;
+  border-radius: 30px;
+}
+
+.settingModalScrollable::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.settingModalContent {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.settingModalTitle {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #323f47;
+  @media (min-width: 768px) {
+    font-size: 28px;
+    line-height: 1.14;
+  }
+}
