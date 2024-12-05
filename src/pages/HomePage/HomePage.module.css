@@ -1,0 +1,51 @@
+/* Initial Container Settings (Mobile First) */
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Section Styles */
+.welcomeSection {
+  color: var(--background-primary-dark);
+  padding: 24px 0px 16px 0px;
+  width: 100%;
+}
+
+.advantagesSection {
+  width: 100%;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+/* BREAKPOINTS (Mobile First) */
+/* sm */
+@media (min-width: 375px) {
+  .container {
+    width: 375px;
+  }
+}
+
+/* md */
+@media (min-width: 768px) {
+  .welcomeSection {
+    padding: 32px 0px;
+  }
+}
+
+/* lg */
+@media (min-width: 1440px) {
+  .wrap {
+    flex-direction: row;
+    width: 1376px;
+    gap: 32px;
+  }
+
+  .welcomeSection {
+    padding: 32px 0px;
+    max-width: 672px;
+  }
+}

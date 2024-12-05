@@ -1,0 +1,72 @@
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 28px;
+  height: 44px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+:global(.grid7desktop) .item {
+  flex-direction: row;
+}
+
+.item.empty {
+  background-color: transparent;
+  cursor: default;
+}
+
+.dayNumber {
+  display: inline-flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 2px;
+  border-radius: 50%;
+  background-color: rgba(50, 63, 71, 0.2);
+  font-weight: 700;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.percent {
+  color: rgba(47, 47, 47, 0.6);
+  font-weight: 400;
+  font-size: 10px;
+  font-family: "Poppins", sans-serif;
+  margin: 0 auto;
+}
+
+.drinkALot .dayNumber {
+  background-color: #fff;
+}
+
+.item.active .dayNumber {
+  background-color: #323f47;
+  color: #9be1a0;
+}
+
+.item:hover .dayNumber {
+  background-color: #9be1a0;
+}
+
+@media only screen and (min-width: 768px) {
+  .item {
+    width: 38px;
+    height: 65px;
+  }
+  .dayNumber {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 6px;
+    font-size: 16px;
+  }
+
+  .percent {
+    font-size: 12px;
+  }
+}
